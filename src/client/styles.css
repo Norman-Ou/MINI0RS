@@ -380,7 +380,7 @@ input::placeholder { color: var(--text-muted); opacity: 1; }
   .details-panel { width: 100%; min-width: 0; max-width: none; resize: none; border-left: 0; border-top: 1px solid var(--border); }
 }
 
-/* COViS mode navigation, shared by T2I-Explorer and Scoring. */
+/* MINI0RS mode navigation, shared by T2I-Explorer and Scoring. */
 .mode-nav { display: flex; align-items: center; gap: 4px; margin-left: 12px; }
 .mode-nav a { color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 500; padding: 6px 10px; border-radius: var(--radius); }
 .mode-nav a:hover { color: inherit; background: var(--surface-muted); }

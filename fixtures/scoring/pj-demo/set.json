@@ -2,7 +2,7 @@
   "schema_version": 1,
   "id": "pj-demo",
   "title": "Pairwise judge demo",
-  "description": "Synthetic fixture set for the COViS Scoring mode.",
+  "description": "Synthetic fixture set for the MINI0RS Scoring mode.",
   "source": {
     "cohort": "pj-demo-cohort",
     "round": "demo-round"

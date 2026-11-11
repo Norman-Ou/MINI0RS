@@ -62,9 +62,9 @@ it('splits grounded captions into phrase chips and picks contrasting text', () =
     expect(phraseColors([0, 0, 128]).color).toBe('#fff');
 });
 
-it('shows COViS with both mode entries and highlights the active one', () => {
+it('shows MINI0RS with both mode entries and highlights the active one', () => {
     render(<TopBar mode="scoring"/>);
-    expect(screen.getByRole('link', { name: 'COViS' })).toHaveAttribute('href', '/');
+    expect(screen.getByRole('link', { name: 'MINI0RS' })).toHaveAttribute('href', '/');
     expect(screen.getByRole('link', { name: 'Scoring' })).toHaveAttribute('aria-current', 'page');
     expect(screen.getByRole('link', { name: 'T2I-Explorer' })).not.toHaveAttribute('aria-current');
     cleanup();
@@ -106,12 +106,12 @@ describe('ScoringApp', () => {
         expect(screen.getByRole('button', { name: 'Continue' })).toBeDisabled();
         fireEvent.change(input, { target: { value: 'alice' } });
         fireEvent.click(screen.getByRole('button', { name: 'Continue' }));
-        expect(localStorage.getItem('covis.reviewer')).toBe('alice');
+        expect(localStorage.getItem('mini0rs.reviewer')).toBe('alice');
         expect(await screen.findByRole('heading', { name: 'a' })).toBeInTheDocument();
     });
 
     it('prefills from the default agent set, saves, switches to a composite view and records reveals', async () => {
-        localStorage.setItem('covis.reviewer', 'alice');
+        localStorage.setItem('mini0rs.reviewer', 'alice');
         render(<ScoringApp/>);
         const prefillBox = await screen.findByRole('region', { name: 'Prefilled verdict' });
         expect(await within(prefillBox).findByText('Candidate 2 is tighter.')).toBeInTheDocument();
@@ -137,7 +137,7 @@ describe('ScoringApp', () => {
         vi.stubGlobal('confirm', vi.fn(() => true));
         fireEvent.click(screen.getByRole('button', { name: 'Reveal' }));
         expect(await screen.findByText('Candidate 2 is the prediction; candidate 1 is the ground truth.')).toBeInTheDocument();
-        expect(JSON.parse(localStorage.getItem('covis.revealed.pj-demo.alice')!)).toEqual({ a: { pred: 2, gt: 1 } });
+        expect(JSON.parse(localStorage.getItem('mini0rs.revealed.pj-demo.alice')!)).toEqual({ a: { pred: 2, gt: 1 } });
         fireEvent.click(within(form).getByRole('button', { name: 'Candidate 1' }));
         fireEvent.click(within(form).getByRole('button', { name: 'Save' }));
         await waitFor(() => expect(posts.filter(post => post.url.includes('/labels/'))).toHaveLength(2));
@@ -148,7 +148,7 @@ describe('ScoringApp', () => {
     });
 
     it('shows the instruction and each candidate text with coloured chips, legends and Real names', async () => {
-        localStorage.setItem('covis.reviewer', 'alice');
+        localStorage.setItem('mini0rs.reviewer', 'alice');
         const { container } = render(<ScoringApp/>);
         const section = await screen.findByRole('region', { name: 'Candidate texts' });
         expect(section.previousElementSibling).toHaveClass('media-panels');
@@ -193,7 +193,7 @@ describe('ScoringApp', () => {
     });
 
     it('switches between Anonymous and Real names, auto-revealing the viewed item once', async () => {
-        localStorage.setItem('covis.reviewer', 'alice');
+        localStorage.setItem('mini0rs.reviewer', 'alice');
         const reveal = vi.spyOn(scoringApi, 'reveal');
         render(<ScoringApp/>);
         const form = await screen.findByRole('form', { name: 'Your label' });
@@ -223,7 +223,7 @@ describe('ScoringApp', () => {
         expect(titles()).toEqual(['Original', 'Candidate 1 · GT', 'Candidate 2 · Prediction']);
         expect(choices()).toEqual(['Candidate 1 · GT', 'Candidate 2 · Prediction', 'Tie']);
         expect(within(prefillBox).getByText('Candidate 2 · Prediction')).toBeInTheDocument();
-        expect(JSON.parse(localStorage.getItem('covis.revealed.pj-demo.alice')!)).toEqual({ a: { pred: 2, gt: 1 } });
+        expect(JSON.parse(localStorage.getItem('mini0rs.revealed.pj-demo.alice')!)).toEqual({ a: { pred: 2, gt: 1 } });
         fireEvent.click(screen.getByRole('button', { name: 'Side by side' }));
         expect(screen.getByText('The composite canvas labels its halves Candidate 1 and Candidate 2. Candidate 1 = GT, Candidate 2 = Prediction.')).toBeInTheDocument();
 

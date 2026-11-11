@@ -1,12 +1,12 @@
 // Renders public/favicon.ico (16/32/48 px PNG entries) from a 3x5 bitmap font:
-// a plain "CO / ViS" mark, black on white, without depending on system fonts.
+// a plain "MINI / 0RS" mark, black on white, without depending on system fonts.
 // Usage: pnpm exec tsx tools/create-favicon.ts
 import { writeFile } from 'node:fs/promises';
 import sharp from 'sharp';
 
 const GLYPHS: Record<string, string[]> = {
-    C: ['111', '100', '100', '100', '111'], O: ['111', '101', '101', '101', '111'],
-    V: ['101', '101', '101', '101', '010'], i: ['010', '000', '010', '010', '010'], S: ['111', '100', '111', '001', '111']
+    M: ['101', '111', '111', '101', '101'], I: ['111', '010', '010', '010', '111'], N: ['110', '101', '101', '101', '101'],
+    '0': ['010', '101', '101', '101', '010'], R: ['110', '101', '110', '101', '101'], S: ['111', '100', '111', '001', '111']
 };
 async function icon(size: number) {
     const scale = size / 16;
@@ -22,8 +22,8 @@ async function icon(size: number) {
             }
         })));
     };
-    line('CO', 2 * scale);
-    line('ViS', 9 * scale);
+    line('MINI', 2 * scale);
+    line('0RS', 9 * scale);
     return sharp(pixels, { raw: { width: size, height: size, channels: 4 } }).png().toBuffer();
 }
 const sizes = [16, 32, 48];

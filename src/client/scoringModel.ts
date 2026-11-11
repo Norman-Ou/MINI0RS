@@ -2,12 +2,12 @@ import type { SampleView } from "../shared/contracts.js";
 import { isAgentLabelSet, reviewerPattern, type ScoringCandidateText, type ScoringItemView, type ScoringLabelRow, type ScoringRevealResponse } from "../shared/scoring.js";
 import type { ScoringViewState } from "./scoringUrlState.js";
 
-export const REVIEWER_KEY = "covis.reviewer";
+export const REVIEWER_KEY = "mini0rs.reviewer";
 const REVIEWER = new RegExp(reviewerPattern);
 type BlindMap = ScoringRevealResponse["blind_map"];
 /** "Candidate n", or "Candidate n · GT / Prediction" when Real mode has the item's reveal. */
 export const candidateTitle = (candidate: 1 | 2, roles?: BlindMap) => `Candidate ${candidate}${roles ? ` · ${roles.gt === candidate ? "GT" : "Prediction"}` : ""}`;
-export const revealedKey = (setId: string, reviewer: string) => `covis.revealed.${setId}.${reviewer}`;
+export const revealedKey = (setId: string, reviewer: string) => `mini0rs.revealed.${setId}.${reviewer}`;
 
 type Rgb = ScoringCandidateText["phrases"][number]["rgb"];
 export type CaptionSegment = { text: string; phrase?: ScoringCandidateText["phrases"][number] };

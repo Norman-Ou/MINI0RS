@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "covis/scoring-label",
+  "$id": "mini0rs/scoring-label",
   "type": "object",
   "additionalProperties": true,
   "required": [
