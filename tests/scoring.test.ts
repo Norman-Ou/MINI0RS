@@ -13,7 +13,7 @@ const json = { ...host, 'content-type': 'application/json' };
 const base = '/api/scoring/sets/pj-demo';
 
 async function setup(extra: Partial<Parameters<typeof buildApp>[0]> = {}) {
-    const root = await mkdtemp(path.join(os.tmpdir(), 'covis-scoring-'));
+    const root = await mkdtemp(path.join(os.tmpdir(), 'mini0rs-scoring-'));
     roots.push(root);
     await cp('fixtures/scoring', path.join(root, 'scoring'), { recursive: true });
     const app = await buildApp({ dataRoot: 'fixtures/datasets', scoringRoot: path.join(root, 'scoring'), serveClient: false, ...extra });
@@ -133,11 +133,11 @@ it('returns blind_map only from the reveal endpoint and marks later rows reveale
 });
 
 it('redirects configured legacy hosts to the canonical origin before the host allowlist', async () => {
-    const { app } = await setup({ redirectHosts: ['dive.ouruizhe.top'], canonicalOrigin: 'https://covis.ouruizhe.top' });
+    const { app } = await setup({ redirectHosts: ['dive.ouruizhe.top'], canonicalOrigin: 'https://mini0rs.ouruizhe.top' });
     const response = await app.inject({ url: '/scoring?set=pj-demo&item=demo-refseg-01', headers: { host: 'dive.ouruizhe.top' } });
     expect(response.statusCode).toBe(302);
-    expect(response.headers.location).toBe('https://covis.ouruizhe.top/scoring?set=pj-demo&item=demo-refseg-01');
-    expect((await app.inject({ url: '/api/catalog?x=1', headers: { host: 'DIVE.ouruizhe.top:443' } })).headers.location).toBe('https://covis.ouruizhe.top/api/catalog?x=1');
+    expect(response.headers.location).toBe('https://mini0rs.ouruizhe.top/scoring?set=pj-demo&item=demo-refseg-01');
+    expect((await app.inject({ url: '/api/catalog?x=1', headers: { host: 'DIVE.ouruizhe.top:443' } })).headers.location).toBe('https://mini0rs.ouruizhe.top/api/catalog?x=1');
     expect((await app.inject({ url: '/api/health', headers: host })).statusCode).toBe(200);
     expect((await app.inject({ url: '/api/health', headers: { host: 'other.test' } })).statusCode).toBe(403);
 });
@@ -146,7 +146,7 @@ it('keeps redirects off by default and rejects an invalid canonical origin', asy
     const { app } = await setup();
     expect((await app.inject({ url: '/api/health', headers: { host: 'dive.ouruizhe.top' } })).statusCode).toBe(403);
     await expect(buildApp({ dataRoot: 'fixtures/datasets', serveClient: false, redirectHosts: ['dive.ouruizhe.top'] })).rejects.toThrow();
-    await expect(buildApp({ dataRoot: 'fixtures/datasets', serveClient: false, redirectHosts: ['dive.ouruizhe.top'], canonicalOrigin: 'https://covis.ouruizhe.top/path' })).rejects.toThrow();
+    await expect(buildApp({ dataRoot: 'fixtures/datasets', serveClient: false, redirectHosts: ['dive.ouruizhe.top'], canonicalOrigin: 'https://mini0rs.ouruizhe.top/path' })).rejects.toThrow();
 });
 
 it('serves no sets without a scoring root', async () => {

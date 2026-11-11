@@ -113,7 +113,7 @@ const candidateText = {
     }
 };
 export const scoringSetSchema = {
-    $id: 'covis/scoring-set', type: 'object', additionalProperties: true,
+    $id: 'mini0rs/scoring-set', type: 'object', additionalProperties: true,
     required: ['schema_version', 'id', 'title', 'source', 'blind_seed', 'instructions', 'presentations'],
     properties: {
         schema_version: { const: 1 }, id, title: { type: 'string', minLength: 1, maxLength: 160 }, description: { type: 'string', maxLength: 4000 },
@@ -124,7 +124,7 @@ export const scoringSetSchema = {
     }
 } as const;
 export const scoringItemSchema = {
-    $id: 'covis/scoring-item', type: 'object', additionalProperties: false,
+    $id: 'mini0rs/scoring-item', type: 'object', additionalProperties: false,
     required: ['item_id', 'pair', 'task', 'task_text', 'presentations', 'blind_map'],
     properties: {
         item_id: id, pair: { type: 'string', minLength: 1, maxLength: 256 }, task: { type: 'string', minLength: 1, maxLength: 128 }, task_text: { type: 'string', maxLength: 8000 }, input_text: { type: 'string', maxLength: 8000 },
@@ -145,7 +145,7 @@ export const scoringItemSchema = {
     }
 } as const;
 export const scoringLabelSchema = {
-    $id: 'covis/scoring-label', type: 'object', additionalProperties: true,
+    $id: 'mini0rs/scoring-label', type: 'object', additionalProperties: true,
     required: ['item_id', 'choice', 'reason', 'source', 'updated_at'],
     properties: {
         item_id: id, choice, reason, regions, source, revealed: { type: 'boolean' }, prefill: { type: 'string', pattern: reviewerPattern },
@@ -155,7 +155,7 @@ export const scoringLabelSchema = {
 } as const;
 /** Body of `POST .../labels/:reviewer`; the server adds `updated_at` and defaults `source` to `human`. */
 export const scoringLabelInputSchema = {
-    $id: 'covis/scoring-label-input', type: 'object', additionalProperties: false,
+    $id: 'mini0rs/scoring-label-input', type: 'object', additionalProperties: false,
     required: ['item_id', 'choice', 'reason'],
     properties: { item_id: id, choice, reason, regions, source, revealed: { type: 'boolean' }, prefill: { type: 'string', pattern: reviewerPattern } }
 } as const;

@@ -5,7 +5,7 @@ import { openPage, reloadPage } from './navigation.js';
 test('navigates between modes, scores an item blind and exports the label', async ({ page }) => {
     const reviewer = `e2e-${test.info().project.name}`;
     await openPage(page, '/');
-    await expect(page).toHaveTitle('COViS');
+    await expect(page).toHaveTitle('MINI0RS');
     await page.getByRole('link', { name: 'Scoring', exact: true }).click();
     await expect(page).toHaveURL(/\/scoring$/);
     await expect(page.getByRole('link', { name: 'Scoring', exact: true })).toHaveAttribute('aria-current', 'page');

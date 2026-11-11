@@ -65,7 +65,7 @@ catalog/records 使用元数据快照 ETag；自动刷新在后台检查元数�
 
 ## 浏览和比较
 
-首页数据集卡片只有 collection title，高度随内容撑开，上下内边距 12px。首页标题、圆角搜索框、数量摘要及卡片区左边对齐。数据集名称和 ID 支持模糊搜索：忽略大小写、空白和分隔符，按输入字符顺序匹配不连续片段。应用名称为 COViS，浏览器标题与名称栏一致，favicon 为白底黑字 “CO/ViS” SVG（同时提供 16/32/48px ICO）。首页标题为 COViS。点击顶部 COViS 名称回到首页，清空当前数据集、对比列及样本搜索，支持浏览器前进／后退。顶部名称栏只显示 COViS 和右侧的模式导航（T2I-Explorer、Scoring，当前模式高亮，链接返回各模式本标签页上次的查询），不含操作按钮；侧栏顶部左侧使用箭头收起／展开，底部左侧使用 SVG 图标 Reload data。桌面收起后保留 44px 窄栏和两个图标，展开时恢复已保存宽度；侧栏中间控制区独立滚动。任务名称首字母大写，GCG/VGD 全大写、Relative Height 分词。任务卡片只显示名称和展开按钮，高度随内容撑开，上下内边距 8px。来源图标按声明的原生/衍生分类显示。
+首页数据集卡片只有 collection title，高度随内容撑开，上下内边距 12px。首页标题、圆角搜索框、数量摘要及卡片区左边对齐。数据集名称和 ID 支持模糊搜索：忽略大小写、空白和分隔符，按输入字符顺序匹配不连续片段。应用名称为 MINI0RS，浏览器标题与名称栏一致，favicon 为白底黑字 “MINI/0RS” SVG（同时提供 16/32/48px ICO）。首页标题为 MINI0RS。点击顶部 MINI0RS 名称回到首页，清空当前数据集、对比列及样本搜索，支持浏览器前进／后退。顶部名称栏只显示 MINI0RS 和右侧的模式导航（T2I-Explorer、Scoring，当前模式高亮，链接返回各模式本标签页上次的查询），不含操作按钮；侧栏顶部左侧使用箭头收起／展开，底部左侧使用 SVG 图标 Reload data。桌面收起后保留 44px 窄栏和两个图标，展开时恢复已保存宽度；侧栏中间控制区独立滚动。任务名称首字母大写，GCG/VGD 全大写、Relative Height 分词。任务卡片只显示名称和展开按钮，高度随内容撑开，上下内边距 8px。来源图标按声明的原生/衍生分类显示。
 
 侧栏从上到下为 Dataset、View by（Task/Exp）、Search examples、已选列、Page size。已选列与对比列头使用同一单行标题：任务-数据来源-实验；超长省略并提供完整标题提示。Task 模式选择顺序 task → dataset → exp；Exp 模式 exp → task → dataset，只列实际存在的实验。卡片下拉和侧栏添加列均使用级联菜单，每层向右展开并保留之前的层级；切换父项替换右侧分支，最终选择才添加列。各列独立纵向滚动，空间不足时菜单内部横向滚动。切换模式保留列和浏览状态。同一实验允许多个独立列实例，列可排序、删除，菜单在选择、点击外部和 Escape 时关闭。
 
@@ -113,4 +113,4 @@ collection 导航保持 `?dataset=sft-e6.0-r30`。列为 `cols=task:dataset:exp:
 
 写入：每行以单次 `write(2)` 追加到 `O_APPEND|O_NOFOLLOW` 打开的文件并 `fdatasync`，同一文件在进程内串行；不同评审写不同文件，互不覆盖。没有删除、覆盖或 PUT/PATCH 接口。Reveal 后，该评审此后为该 item 写入的所有行都标记 `revealed: true`（服务端强制，且一旦文件中出现即保持）；前端同时在 localStorage 记住已显示的 `blind_map`。item 视图的 Anonymous / Real 切换（URL `real=1`，缺省 Anonymous）只用该接口取得映射：开启 Real 时确认一次，之后每个显示的未 Reveal item 自动调用该接口并按上述方式记录，候选名称显示为 `Candidate n · GT` / `Candidate n · Prediction`（拼接画布在说明中写出映射）；切回 Anonymous 不撤销 Reveal。
 
-旧域名跳转：`COVIS_REDIRECT_HOSTS`（逗号分隔）中的 Host 收到 302 到 `COVIS_CANONICAL_ORIGIN` + 原路径和查询，先于 Host 白名单；只设其一时启动失败，均未设置时关闭。
+旧域名跳转：`MINI0RS_REDIRECT_HOSTS`（逗号分隔）中的 Host 收到 302 到 `MINI0RS_CANONICAL_ORIGIN` + 原路径和查询，先于 Host 白名单；只设其一时启动失败，均未设置时关闭。

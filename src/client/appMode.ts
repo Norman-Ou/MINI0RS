@@ -1,5 +1,5 @@
 export type AppMode = "explorer" | "scoring";
-const LAST_SEARCH = { explorer: "covis.last.explorer", scoring: "covis.last.scoring" } as const;
+const LAST_SEARCH = { explorer: "mini0rs.last.explorer", scoring: "mini0rs.last.scoring" } as const;
 export const isScoringPath = (pathname: string) => pathname === "/scoring" || pathname.startsWith("/scoring/");
 
 /** Remember each mode's last query so the navigation entries return to it. */

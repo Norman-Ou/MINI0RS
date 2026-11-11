@@ -111,7 +111,7 @@ await rm(stage, { recursive: true, force: true });
 const setDir = path.join(stage, setId);
 await mkdir(path.join(setDir, 'labels'), { recursive: true });
 const manifest: ScoringSetManifest = {
-    schema_version: 1, id: setId, title: 'Pairwise judge demo', description: 'Synthetic fixture set for the COViS Scoring mode.',
+    schema_version: 1, id: setId, title: 'Pairwise judge demo', description: 'Synthetic fixture set for the MINI0RS Scoring mode.',
     source: { cohort: 'pj-demo-cohort', round: 'demo-round' }, blind_seed: 42,
     instructions: 'Two anonymous candidate annotations are shown for each item. Choose the one that better annotates the target described by the task text, or tie, and give a short reason.',
     presentations, created_at: '2026-10-31T00:00:00Z'
